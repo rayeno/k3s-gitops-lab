@@ -1,19 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: gitops-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: gitops-demo
   template:
     metadata:
       labels:
-        app: nginx
+        app: gitops-demo
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: gitops-demo
+        image: ghcr.io/rayeno/flask-app:latest
         ports:
-        - containerPort: 80
+        - containerPort: 5000
+        env:
+        - name: APP_ENV
+          value: dev
+        - name: APP_VERSION
+          value: latest
+        - name: APP_MESSAGE
+          value: Hello from the GitOps demo app!
