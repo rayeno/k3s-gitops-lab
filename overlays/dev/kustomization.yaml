@@ -4,10 +4,19 @@ resources:
 patches:
   - target:
       kind: Deployment
-      name: nginx
+      name: gitops-demo
     patch: |
       - op: replace
         path: /spec/replicas
         value: 1
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: ghcr.io/rayeno/flask-app:latest
+      - op: replace
+        path: /spec/template/spec/containers/0/env/0/value
+        value: dev
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/value
+        value: latest
 
 namespace: dev
