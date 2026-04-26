@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gitops-demo
+  name: flask-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gitops-demo
+      app: flask-app
   template:
     metadata:
       labels:
-        app: gitops-demo
+        app: flask-app
     spec:
       containers:
-      - name: gitops-demo
+      - name: flask-app
         image: ghcr.io/rayeno/flask-app:latest
         ports:
         - containerPort: 5000

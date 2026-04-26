@@ -4,7 +4,7 @@ resources:
 patches:
   - target:
       kind: Deployment
-      name: gitops-demo
+      name: flask-app
     patch: |
       - op: replace
         path: /spec/replicas
@@ -18,5 +18,12 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/1/value
         value: latest
+  - target:
+      kind: Ingress
+      name: flask-app
+    patch: |
+      - op: replace
+        path: /spec/rules/0/host
+        value: flask-prod.local
 
 namespace: prod
